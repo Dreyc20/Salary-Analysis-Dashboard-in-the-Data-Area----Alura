@@ -50,15 +50,15 @@ else:
     salario_medio, salario_mediano, salario_maximo, total_registros, cargo_mais_comum = 0, 0, 0, ""
 
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Salário médio", f"${salario_medio:,.0f}")
-col2.metric("Salário máximo", f"${salario_maximo:,.0f}")
-col3.metric("Total de registros", f"{total_registros:,}")
-col4.metric("Cargo mais frequente", cargo_mais_frequente)
+col1.metric("Average Salary", f"${salario_medio:,.0f}")
+col2.metric("Maximum Salary", f"${salario_maximo:,.0f}")
+col3.metric("Total Records", f"{total_registros:,}")
+col4.metric("Most Common Job", cargo_mais_frequente)
 
 st.markdown("---")
 
 
-st.subheader("Gráficos")
+st.subheader("Charts")
 
 col_graf1, col_graf2 = st.columns(2)
 
@@ -70,13 +70,13 @@ with col_graf1:
             x='usd',
             y='cargo',
             orientation='h',
-            title="Top 10 cargos por salário médio",
-            labels={'usd': 'Média salarial anual (USD)', 'cargo': ''}
+            title="Top 10 Jobs by Average Salary",
+            labels={'usd': 'Average Annual Salary (USD)', 'cargo': ''}
         )
         grafico_cargos.update_layout(title_x=0.1, yaxis={'categoryorder':'total ascending'})
         st.plotly_chart(grafico_cargos, use_container_width=True)
     else:
-        st.warning("Nenhum dado para exibir no gráfico de cargos.")
+        st.warning("No data available to display in the job chart.")
 
 with col_graf2:
     if not df_filtrado.empty:
@@ -84,13 +84,13 @@ with col_graf2:
             df_filtrado,
             x='usd',
             nbins=30,
-            title="Distribuição de salários anuais",
-            labels={'usd': 'Faixa salarial (USD)', 'count': ''}
+            title="Distribution of Annual Salaries",
+            labels={'usd': 'Salary Range (USD)', 'count': ''}
         )
         grafico_hist.update_layout(title_x=0.1)
         st.plotly_chart(grafico_hist, use_container_width=True)
     else:
-        st.warning("Nenhum dado para exibir no gráfico de distribuição.")
+        st.warning("No data available to display in the salary distribution chart.")
 
 col_graf3, col_graf4 = st.columns(2)
 
@@ -109,7 +109,7 @@ with col_graf3:
         grafico_remoto.update_layout(title_x=0.1)
         st.plotly_chart(grafico_remoto, use_container_width=True)
     else:
-        st.warning("Nenhum dado para exibir no gráfico dos tipos de trabalho.")
+        st.warning("No data available to display in the work type chart.")
 
 with col_graf4:
     if not df_filtrado.empty:
@@ -124,7 +124,7 @@ with col_graf4:
         grafico_paises.update_layout(title_x=0.1)
         st.plotly_chart(grafico_paises, use_container_width=True)
     else:
-        st.warning("Nenhum dado para exibir no gráfico de países.")
+        st.warning("No data available to display in the country chart.")
 
 st.subheader("Detailed data")
 st.dataframe(df_filtrado)
